@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>华体会 · 日常查询与对照手册</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: #f4f9fd;
+      color: #1a2b3c;
+      line-height: 1.7;
+      padding: 1.5rem 1rem 3rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* 网格卡片风格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+
+    @media (min-width: 600px) {
+      .card-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.5rem 1.3rem;
+      box-shadow: 0 4px 12px rgba(0, 32, 28, 0.05);
+      transition: 0.2s ease;
+      border: 1px solid rgba(0, 128, 128, 0.08);
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 60, 55, 0.08);
+      border-color: #2d9f8b30;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 550;
+      color: #115e5a;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card p, .card li {
+      font-size: 0.95rem;
+      color: #2b4150;
+      margin-bottom: 0.4rem;
+    }
+
+    .card ul {
+      padding-left: 1.2rem;
+    }
+
+    .card li {
+      list-style-type: '— ';
+      padding-left: 0.3rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #d5f0ec;
+      color: #11665c;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+      margin-left: 0.5rem;
+      letter-spacing: 0.3px;
+    }
+
+    /* hero 区 */
+    .hero {
+      background: linear-gradient(145deg, #e5f6f2 0%, #cdebe5 100%);
+      border-radius: 28px;
+      padding: 2rem 1.5rem;
+      margin-bottom: 2.5rem;
+      border: 1px solid rgba(28, 118, 108, 0.1);
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 450;
+      color: #0a3a36;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+    }
+
+    .hero h1 small {
+      font-size: 1rem;
+      font-weight: 350;
+      color: #1f6b62;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    .hero p {
+      margin-top: 1rem;
+      font-size: 1.05rem;
+      color: #1e4d47;
+      max-width: 700px;
+    }
+
+    .hero .tagline {
+      background: #ffffffb3;
+      display: inline-block;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      margin-top: 0.8rem;
+      color: #0d524b;
+      backdrop-filter: blur(2px);
+    }
+
+    /* 引述/提示块 */
+    .notice-box {
+      background: #f0f8f6;
+      border-left: 4px solid #289b8b;
+      border-radius: 0 18px 18px 0;
+      padding: 1.3rem 1.5rem;
+      margin: 2rem 0 1.5rem;
+      font-size: 0.95rem;
+      color: #14413c;
+    }
+
+    .notice-box strong {
+      color: #0d5e54;
+    }
+
+    .inline-link {
+      color: #18766a;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+      text-decoration-color: #289b8b70;
+      font-weight: 450;
+      transition: 0.15s;
+    }
+
+    .inline-link:hover {
+      color: #0d554b;
+      text-decoration-color: #115e55;
+    }
+
+    .faq-item {
+      margin-bottom: 1.2rem;
+    }
+
+    .faq-item h4 {
+      font-weight: 550;
+      color: #13534a;
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-item p {
+      font-size: 0.9rem;
+      color: #2d4a47;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      color: #0a3f39;
+      margin: 2rem 0 1rem;
+      border-bottom: 2px solid #c4e3dd;
+      padding-bottom: 0.4rem;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .pill {
+      background: #d8ede8;
+      color: #0b4f47;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      border: 1px solid #a2cfc6;
+    }
+
+    /* 移动端微调 */
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.6rem;
+      }
+      .card {
+        padding: 1.2rem;
+      }
+      body {
+        padding: 0.8rem 0.6rem 2rem;
+      }
+    }
+
+    hr {
+      border: none;
+      border-top: 2px dashed #c5ded8;
+      margin: 2rem 0;
+      opacity: 0.5;
+    }
+
+    .footer-note {
+      font-size: 0.8rem;
+      color: #5b7a75;
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid #cce3de;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- hero -->
+  <div class="hero">
+    <h1>
+      日常对照 · 华体会
+      <small>从查询到延伸，一个安静的参考页</small>
+    </h1>
+    <p>
+      说起 <a href="https://mainweb-hth.com.cn" class="inline-link">华体会</a>，大多数人印象里是一个快速查询和比照的站点。
+      它并不喧哗，也没有铺天盖地的推广。但对于经常需要阅览、对照的人来说，它提供了一种低干扰的获取方式。
+    </p>
+    <div class="tagline">📋 摘要 · 亮点 · 使用建议</div>
+  </div>
+
+  <!-- 网格卡片：产品式亮点 -->
+  <div class="card-grid">
+    <div class="card">
+      <h3>📌 摘要 <span class="badge">what</span></h3>
+      <p><a href="https://mainweb-hth.com.cn" class="inline-link">华体会</a> 是一个以信息整合与呈现为主体的站点。它不像新闻聚合那样冗杂，更像一本可以随时翻查的参照簿。页面结构偏向扁平，便于直接定位内容。</p>
+    </div>
+    <div class="card">
+      <h3>✨ 特点 <span class="badge">why</span></h3>
+      <ul>
+        <li>版式干净，没有过度装饰，阅读负担小</li>
+        <li>信息分组清晰，适合快速扫视</li>
+        <li>更新节奏平稳，不制造信息焦虑</li>
+        <li>整体基调中性、客观</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🧭 常见场景 <span class="badge">when</span></h3>
+      <ul>
+        <li>日常查阅某一分类下的条目</li>
+        <li>与其它资料进行对照核实</li>
+        <li>延伸阅读时作为背景参考</li>
+        <li>需要不受推送干扰的安静浏览</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>⚙️ 使用建议 <span class="badge">how</span></h3>
+      <p>打开 <a href="https://mainweb-hth.com.cn" class="inline-link">华体会</a> 后，可以直接使用站内导航或关键词定位。由于页面内容侧重对照，建议搭配其他资料一同阅览。若想保持专注，可关闭浏览器多余标签。</p>
+    </div>
+  </div>
+
+  <!-- 提示块：可信但克制的说明 -->
+  <div class="notice-box">
+    <strong>📣 客观说明</strong> — 本页仅对 <a href="https://mainweb-hth.com.cn" class="inline-link">华体会</a> 做常规特征描述，不涉及任何诱导、承诺或非正式担保。网站内容请以实际页面为准。任何决策请结合多方信息自行判断。
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <h2 class="section-title">❓ 常见疑问摘要</h2>
+
+  <div class="faq-item">
+    <h4>华体会 适合哪类使用者？</h4>
+    <p>适合习惯通过浏览来获取框架信息、并愿意自行延伸阅读的人。不太适合习惯碎片化推送的用户。</p>
+  </div>
+  <div class="faq-item">
+    <h4>是否需要注册或登录？</h4>
+    <p>该站以开放浏览为主，大部分内容无需身份验证即可查阅。具体以实际页面功能为准。</p>
+  </div>
+  <div class="faq-item">
+    <h4>内容更新频率如何？</h4>
+    <p>根据观察，保持常规更新节奏，不追求每日刷屏，更适合定期访问而不是反复刷新。</p>
+  </div>
+
+  <!-- 延伸阅读 & 标签 (pill) -->
+  <div style="margin: 2rem 0 0.5rem;">
+    <span style="font-size:0.9rem; color:#1d6b61;">延伸话题</span>
+    <div class="pill-list">
+      <span class="pill">信息对照方法</span>
+      <span class="pill">安静浏览习惯</span>
+      <span class="pill">数字减法</span>
+      <span class="pill">参考页设计</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 结尾引用式句子，自然嵌入链接 -->
+  <p style="font-size:0.95rem; color:#2a5f58; max-width: 90%;">
+    如果你正在寻找一个不那么匆忙的参照起点，不妨把 <a href="https://mainweb-hth.com.cn" class="inline-link">华体会</a> 加入书签。它不一定覆盖所有答案，却可能成为你日常查阅时一块安静的跳板。
+  </p>
+
+  <!-- 页脚 -->
+  <div class="footer-note">
+    <span>介绍页 · 仅供产品说明参考</span>
+  </div>
+
+</div>
+</body>
+</html>
