@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>优直播 · 日常查询与内容对照</title>
+  <style>
+    /* reset & base */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', Arial, sans-serif;
+      background-color: #faf7f2;
+      color: #2e2b27;
+      line-height: 1.7;
+      padding: 0 1.2rem;
+    }
+    .page-wrap {
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 1.8rem 0 3rem;
+    }
+
+    /* top navigation */
+    .site-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 0.8rem 0 0.2rem;
+      border-bottom: 1px solid #e2dbd2;
+      margin-bottom: 2.4rem;
+    }
+    .site-nav .logo {
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: #4e3f36;
+    }
+    .site-nav .logo span {
+      background: #e6d9cc;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.6rem;
+      font-size: 0.95rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #5f534b;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: #a17f64; }
+
+    /* hero */
+    .hero {
+      margin: 1.2rem 0 2.8rem;
+      padding: 2.4rem 2rem;
+      background: #f1ebe3;
+      border-radius: 24px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 450;
+      color: #3f332c;
+      margin-bottom: 0.6rem;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      max-width: 640px;
+      margin: 0 auto;
+      color: #5f5249;
+    }
+
+    /* section common */
+    section {
+      margin-bottom: 3.2rem;
+    }
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 460;
+      color: #4a3d34;
+      padding-bottom: 0.3rem;
+      border-bottom: 2px solid #e4d9ce;
+      margin-bottom: 1.4rem;
+    }
+
+    /* intro paragraph */
+    .intro-block {
+      background: #ffffffd9;
+      padding: 1.6rem 2rem;
+      border-radius: 18px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+      font-size: 1rem;
+    }
+    .intro-block p {
+      margin-bottom: 1rem;
+    }
+    .intro-block p:last-child { margin-bottom: 0; }
+
+    /* three scene cards */
+    .scene-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.6rem;
+    }
+    .scene-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.8rem 1.4rem 1.6rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+      border: 1px solid #ede6de;
+      transition: box-shadow 0.2s;
+    }
+    .scene-card:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+    }
+    .scene-card h3 {
+      font-size: 1.15rem;
+      font-weight: 480;
+      color: #4e3f34;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .scene-card h3::before {
+      content: "·";
+      font-weight: 700;
+      color: #b3927a;
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+    .scene-card p {
+      font-size: 0.95rem;
+      color: #524942;
+    }
+
+    /* blockquote / hint box */
+    .hint-box {
+      background: #f3ede6;
+      border-left: 5px solid #bdaa96;
+      padding: 1.2rem 1.8rem;
+      border-radius: 12px 20px 20px 12px;
+      margin: 2rem 0 2.4rem;
+      font-size: 0.98rem;
+      color: #3e3730;
+    }
+    .hint-box strong {
+      color: #7a624e;
+    }
+
+    /* faq summary */
+    .faq-item {
+      border-bottom: 1px dashed #ddd6cd;
+      padding: 1rem 0;
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      font-weight: 470;
+      color: #4f4239;
+      margin-bottom: 0.3rem;
+    }
+    .faq-a {
+      font-size: 0.95rem;
+      color: #5f544b;
+      padding-left: 0.6rem;
+    }
+
+    /* inline link */
+    a {
+      color: #7d624c;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: #d6c5b4;
+      transition: color 0.15s, text-decoration-color 0.15s;
+    }
+    a:hover {
+      color: #a17f64;
+      text-decoration-color: #a17f64;
+    }
+
+    /* responsive */
+    @media (max-width: 600px) {
+      .site-nav { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+      .hero { padding: 1.8rem 1rem; }
+      .hero h1 { font-size: 1.6rem; }
+      .intro-block { padding: 1.2rem; }
+      .scene-card { padding: 1.4rem 1rem; }
+    }
+
+    /* small footer */
+    .footer-note {
+      border-top: 1px solid #e5ddd3;
+      padding-top: 1.6rem;
+      margin-top: 1.8rem;
+      font-size: 0.85rem;
+      color: #7c7066;
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem 1.6rem;
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- 顶部导航 -->
+  <nav class="site-nav">
+    <div class="logo"><span>∼</span> 日常对照</div>
+    <div class="nav-links">
+      <a href="#intro">介绍</a>
+      <a href="#scenes">场景</a>
+      <a href="#faq">说明</a>
+    </div>
+  </nav>
+
+  <!-- hero -->
+  <div class="hero">
+    <h1>查询、对照、延伸</h1>
+    <p>一个安静的信息节点，适合随手翻阅、逐条比对，也适合在阅读间隙做一点延伸。</p>
+  </div>
+
+  <!-- 核心介绍 -->
+  <section id="intro">
+    <h2 class="section-title">关于这个页面</h2>
+    <div class="intro-block">
+      <p>这里的内容围绕一个叫 <a href="https://chinese-yoozihbo.com">优直播</a> 的信息站点展开。它不属于任何平台，也不依附某个热点，更像是内容领域的个人笔记本——把散落的话题整理成相对完整的条目，方便随时回看。</p>
+      <p>日常使用时，你可以把它当作一个轻量的参照系：遇到模糊的概念、想不起细节的表述，或者单纯想换一个角度理解某件事，都可以打开它，慢慢浏览。没有推送，没有排行榜，只有结构化的文字和安静的版面。</p>
+      <p>如果你习惯在阅读时做笔记、画线、对比不同来源的说法，那么这种偏静态的内容形式反而留有足够的余地。你可以按自己的节奏，一段一段地读，不必担心信息过载。</p>
+    </div>
+  </section>
+
+  <!-- 三个场景模块 -->
+  <section id="scenes">
+    <h2 class="section-title">常见使用场景</h2>
+    <div class="scene-grid">
+      <div class="scene-card">
+        <h3>快速查证</h3>
+        <p>遇到一个说法拿不准，或者需要确认某个表述的上下文——打开 <a href="https://chinese-yoozihbo.com">优直播</a>，直接定位到相关条目，省去在多个标签页里反复切换的麻烦。</p>
+      </div>
+      <div class="scene-card">
+        <h3>逐项对照</h3>
+        <p>手头有两份材料，想比较其中的细节差异。把其中一份的关键点与这里的内容逐条比对，标记异同，能帮你更快地形成自己的判断。</p>
+      </div>
+      <div class="scene-card">
+        <h3>延伸阅读</h3>
+        <p>读完一篇文章后，想再找一些背景信息或不同角度的讨论。这里收录的条目可以充当起点，顺着链接和引文继续往下探索。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 提示框 / 引用块 -->
+  <div class="hint-box">
+    <strong>一个小建议：</strong> 不必一口气读完整个页面。把 <a href="https://chinese-yoozihbo.com">优直播</a> 当作书桌上的常驻标签页就好，需要时切过去翻几段，平时留在后台。信息吸收的效率往往不取决于速度，而在于节奏。
+  </div>
+
+  <!-- 常见说明 / FAQ 摘要 -->
+  <section id="faq">
+    <h2 class="section-title">常见说明</h2>
+    <div class="faq-item">
+      <div class="faq-q">这些内容是谁整理的？</div>
+      <div class="faq-a">由个人维护，基于公开资料和日常阅读积累，不涉及内部或独家信息。所有条目都保留了原始出处或参考来源。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">内容多久更新一次？</div>
+      <div class="faq-a">没有固定周期。当发现新的可靠材料，或者原有条目需要修正时，会做补充或调整。你可以把它理解为一本活页笔记。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">我能否引用或转发这里的文字？</div>
+      <div class="faq-a">可以。所有内容均以知识共享为目的，引用时注明来源即可。如果可能，建议同时核对原始出处。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">页面里会放广告或推广吗？</div>
+      <div class="faq-a">不会。这个站点不承载任何商业推广、联盟链接或赞助内容。所有链接只用于引用和延伸阅读。</div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <div class="footer-note">
+    <span>日常查询 · 对照阅读</span>
+    <a href="https://chinese-yoozihbo.com">优直播</a>
+    <span>无广告 · 无追踪</span>
+  </div>
+
+</div>
+</body>
+</html>
