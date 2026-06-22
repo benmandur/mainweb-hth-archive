@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>优直播 · 场景化直播服务</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f4f5f7;
+      color: #1e2025;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: #1e3a5f;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #0d2137;
+      text-decoration: underline;
+    }
+
+    /* 容器 */
+    .wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+    }
+
+    /* 顶部导航 */
+    .top-nav {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e4e8;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-brand {
+      font-weight: 600;
+      font-size: 1.2rem;
+      letter-spacing: 0.02em;
+      color: #23262b;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      font-size: 0.95rem;
+    }
+    .nav-links li a {
+      color: #3f434b;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-links li a:hover {
+      border-bottom-color: #1e3a5f;
+      text-decoration: none;
+    }
+
+    /* hero 区 */
+    .hero {
+      padding: 60px 0 48px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #14161a;
+      margin-bottom: 12px;
+    }
+    .hero .sub {
+      font-size: 1.1rem;
+      color: #4b4f59;
+      max-width: 640px;
+      margin: 0 auto 18px;
+    }
+    .hero .tagline {
+      display: inline-block;
+      background: #e6edf5;
+      padding: 6px 18px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: #1e3a5f;
+      border: 1px solid #cdd7e4;
+    }
+
+    /* 卡片通用 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin: 48px 0;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.03);
+      border: 1px solid #e9ebef;
+      padding: 32px 24px 28px;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .card:hover {
+      border-color: #d0d6de;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    }
+    .card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #1c2127;
+    }
+    .card p {
+      color: #464b54;
+      font-size: 0.95rem;
+    }
+    .card .card-meta {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.8rem;
+      color: #657080;
+      border-left: 3px solid #bcc6d4;
+      padding-left: 10px;
+    }
+
+    /* 场景区专用样式 */
+    .section-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6f7887;
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #171b21;
+    }
+    .scene-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+      margin: 32px 0 16px;
+    }
+    .scene-item {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #e2e6ec;
+      padding: 26px 20px 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .scene-item h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .scene-item p {
+      color: #4d535e;
+      font-size: 0.92rem;
+    }
+
+    /* 常见说明 FAQ */
+    .faq-summary {
+      background: #f9fafc;
+      border-radius: 14px;
+      border: 1px solid #e3e6ec;
+      padding: 28px 30px 26px;
+      margin: 24px 0 48px;
+    }
+    .faq-summary h3 {
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+    }
+    .faq-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #e6e9ef;
+    }
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    .faq-q {
+      font-weight: 500;
+      color: #1d2128;
+    }
+    .faq-a {
+      margin-top: 3px;
+      color: #515763;
+      font-size: 0.93rem;
+    }
+
+    /* 页脚 */
+    .footer {
+      margin-top: 48px;
+      padding: 28px 0 24px;
+      border-top: 1px solid #dfe1e7;
+      text-align: center;
+      color: #6a717e;
+      font-size: 0.9rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 700px) {
+      .nav-inner {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 12px 0;
+        gap: 6px;
+      }
+      .nav-links {
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .card-grid {
+        gap: 18px;
+      }
+      .faq-summary {
+        padding: 22px 18px;
+      }
+    }
+    @media (max-width: 480px) {
+      .wrapper {
+        padding: 0 16px;
+      }
+      .hero {
+        padding: 36px 0 30px;
+      }
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="top-nav">
+    <div class="wrapper nav-inner">
+      <span class="nav-brand">优直播</span>
+      <ul class="nav-links">
+        <li><a href="#scenes">场景</a></li>
+        <li><a href="#faq">说明</a></li>
+        <li><a href="https://yoozihbofficial.com">优直播</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- hero 介绍区 -->
+  <section class="hero wrapper">
+    <h1>直播，不止于画面</h1>
+    <p class="sub">
+      面向企业与创作者的轻量化直播解决方案。<br>
+      设备无关、延迟可控、专注内容传递。
+    </p>
+    <span class="tagline">场景驱动 · 稳定可靠</span>
+  </section>
+
+  <!-- 核心介绍卡片（特点/概要） -->
+  <div class="wrapper">
+    <div class="card-grid">
+      <div class="card">
+        <h3>极低门槛</h3>
+        <p>无需专用编码器或复杂推流配置。从手机到专业摄像机，多数设备可通过 <a href="https://yoozihbofficial.com">优直播</a> 标准协议快速接入，专注于内容而非调试。</p>
+        <span class="card-meta">兼容 RTMP / SRT</span>
+      </div>
+      <div class="card">
+        <h3>场景自适应</h3>
+        <p>根据网络状态、终端类型与观众规模动态调整码率与分辨率，在保障流畅的前提下提供清晰度。适合活动、教育、产品发布等。</p>
+        <span class="card-meta">自适应编码</span>
+      </div>
+      <div class="card">
+        <h3>数据轻量</h3>
+        <p>控制面与传输面分离，不额外产生冗余流量。同步推流与录制支持，所有数据存储于用户区域，兼顾合规与效率。</p>
+        <span class="card-meta">本地录制 + 云端回看</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 三个场景模块 -->
+  <div class="wrapper" id="scenes">
+    <div class="section-label">· 典型应用</div>
+    <h2 class="section-title">多场景直播适配</h2>
+    <div class="scene-cards">
+      <div class="scene-item">
+        <h4>企业会议 · 内部分享</h4>
+        <p>支持私域直播权限管理，观众无需注册即可观看。画面延迟控制在 1–3 秒，双向连麦时延稳定。兼容主流会议平台流转。</p>
+      </div>
+      <div class="scene-item">
+        <h4>课程培训 · 在线教学</h4>
+        <p>低代码嵌入 LMS 或独立站点。支持白名单、回放分段、互动面板。教师端使用 OBS 或直接推流均可。</p>
+      </div>
+      <div class="scene-item">
+        <h4>产品发布 · 线上活动</h4>
+        <p>多机位切换、图文叠加、实时字幕。可同时推流至自建页面与视频号，并记录观看数据。提供可靠的应急推流链路。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 常见说明 (FAQ摘要) -->
+  <div class="wrapper" id="faq">
+    <div class="faq-summary">
+      <h3>常见说明</h3>
+      <div class="faq-item">
+        <div class="faq-q">是否需要购买专用硬件？</div>
+        <div class="faq-a">大多数场景下，使用主流电脑或手机配合推流软件即可开始。如追求多机位或高稳定，建议搭配编码盒，但不强制。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">直播数据如何保存？</div>
+        <div class="faq-a">直播过程中可自动录制至本地或指定存储。云端回放功能需开通对应存储空间，默认保留 30 天，支持导出 MP4。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">最大并发观众是否有限制？</div>
+        <div class="faq-a">基础版本支持 200 并发，企业版可按需扩展至数千。实际并发取决于分发节点配置，可提前进行压力评估。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">是否支持自定义播放器？</div>
+        <div class="faq-a">支持。提供 JavaScript SDK 与 iframe 嵌入方式，可自定义界面样式、水印及互动组件。文档内包含示例代码。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="footer wrapper">
+    <p>
+      更多信息与接入指引，请直接访问 <a href="https://yoozihbofficial.com">优直播</a> · 场景化直播服务
+    </p>
+    <p style="margin-top: 8px; font-size: 0.8rem; color: #8a93a3;">
+      本页仅为功能介绍，实际服务以官网为准。
+    </p>
+  </footer>
+
+</body>
+</html>
